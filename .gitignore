@@ -40,6 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-my-app\.next
-my-app\.env
-my-app\node_modules
+\my-app\.next
+\my-app\.env
+\my-app\node_modules
