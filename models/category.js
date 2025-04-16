@@ -9,6 +9,18 @@ const CategorySchema = new mongoose.Schema({
     type: String,
     enum: ['Expense', 'Income'],
     required: true
+  },
+  isDefault: {
+    type: Boolean,
+    default: false
+  },
+  color: {
+    type: String,
+    default: '#808080' // Default gray color
+  },
+  icon: {
+    type: String,
+    default: 'circle' // Default icon name
   }
 });
 

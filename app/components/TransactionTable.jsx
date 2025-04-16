@@ -24,10 +24,18 @@ export default function TransactionTable({
   };
 
   const formatAmount = (amount) => {
-    return new Intl.NumberFormat('en-US', {
+    const formattedValue = new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD'
-    }).format(amount);
+      currency: 'INR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(Math.abs(amount));
+
+    return (
+      <span className="text-red-500">
+        -{formattedValue}
+      </span>
+    );
   };
 
   const handleSort = (key) => {
@@ -98,7 +106,9 @@ export default function TransactionTable({
               <TableRow key={transaction._id}>
                 <TableCell>{formatDate(transaction.Date)}</TableCell>
                 <TableCell>{transaction.Name}</TableCell>
-                <TableCell>{formatAmount(transaction.Amount)}</TableCell>
+                <TableCell>
+                  {formatAmount(transaction.Amount)}
+                </TableCell>
                 <TableCell>{transaction.Category}</TableCell>
                 <TableCell>{transaction.Description || '-'}</TableCell>
                 <TableCell>

@@ -6,7 +6,12 @@ export async function POST(request) {
   try {
     await dbConnect();
     const data = await request.json();
-    const expense = new Expense(data);
+    // Force Type to "Expense" for all new transactions
+    const transactionData = {
+      ...data,
+      Type: "Expense"
+    };
+    const expense = new Expense(transactionData);
     await expense.save();
     return NextResponse.json({ message: "Transaction created successfully", expense }, { status: 201 });
   } catch (err) {

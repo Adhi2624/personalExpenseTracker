@@ -27,7 +27,8 @@ export default function TransactionForm({
       Amount: "",
       Category: "",
       Description: "",
-      Date: new Date().toISOString().split('T')[0]
+      Date: new Date().toISOString().split('T')[0],
+      Type: "Expense" // Always set as Expense
     }
   });
 
@@ -38,7 +39,8 @@ export default function TransactionForm({
       const formattedData = {
         ...data,
         Amount: parseFloat(data.Amount),
-        Date: new Date(data.Date)
+        Date: new Date(data.Date),
+        Type: "Expense" // Force type as Expense
       };
 
       if (initialData?._id) {
@@ -87,7 +89,7 @@ export default function TransactionForm({
           }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Amount</FormLabel>
+              <FormLabel>Amount (₹)</FormLabel>
               <FormControl>
                 <Input
                   type="number"

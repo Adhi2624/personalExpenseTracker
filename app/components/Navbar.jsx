@@ -28,16 +28,20 @@ export default function App() {
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/transactions">
+          <Link color="foreground" href="/" className="hover:text-yellow-400 transition-colors">
+            Dashboard
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="/transactions" className="hover:text-yellow-400 transition-colors">
             Transactions
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="categories">
+          <Link color="foreground" href="/categories" className="hover:text-yellow-400 transition-colors">
             Categories
           </Link>
         </NavbarItem>
-        
       </NavbarContent>
       <NavbarContent justify="end">
         

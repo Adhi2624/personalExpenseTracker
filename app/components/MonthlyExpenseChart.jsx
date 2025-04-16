@@ -14,15 +14,17 @@ export default function MonthlyExpenseChart({ transactions = [] }) {
   const monthlyData = transactions.reduce((acc, transaction) => {
     const date = parseISO(transaction.Date);
     const monthKey = startOfMonth(date).toISOString();
+    const amount = transaction.Amount;
     
     if (!acc[monthKey]) {
       acc[monthKey] = {
         month: format(date, 'MMM yyyy'),
-        total: 0,
+        expenses: 0
       };
     }
     
-    acc[monthKey].total += transaction.Amount;
+    acc[monthKey].expenses += amount;
+    
     return acc;
   }, {});
 
@@ -32,12 +34,12 @@ export default function MonthlyExpenseChart({ transactions = [] }) {
     .slice(-6); // Show last 6 months
 
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
-    }).format(value);
+    }).format(Math.abs(value));
   };
 
   return (
@@ -55,7 +57,7 @@ export default function MonthlyExpenseChart({ transactions = [] }) {
             tickFormatter={formatCurrency}
           />
           <Tooltip 
-            formatter={(value) => [formatCurrency(value), "Total"]}
+            formatter={(value) => [formatCurrency(value), "Expenses"]}
             contentStyle={{
               backgroundColor: '#1f2937',
               border: 'none',
@@ -64,9 +66,10 @@ export default function MonthlyExpenseChart({ transactions = [] }) {
             }}
           />
           <Bar 
-            dataKey="total" 
-            fill="#3b82f6" 
+            dataKey="expenses" 
+            fill="#ef4444" 
             radius={[4, 4, 0, 0]}
+            name="Expenses"
           />
         </BarChart>
       </ResponsiveContainer>
